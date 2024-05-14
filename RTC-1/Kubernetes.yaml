@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: php-apache
-        image: php:8.1-apache
+        image: RTCclusterregistry.azurecr.io/project:latest  # Utilisez l'image ACR
         ports:
         - containerPort: 80
         volumeMounts:
@@ -25,10 +25,10 @@ spec:
       volumes:
       - name: code-volume
         hostPath:
-          path: ./Code
+          path: ./Code 
       - name: db-volume
         hostPath:
-          path: ./Database
+          path: ./Database  
 ---
 apiVersion: v1
 kind: Service
