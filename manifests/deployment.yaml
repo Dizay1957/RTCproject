@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: RTCworkflow
+  labels:
+    app: RTCworkflow
+  namespace: php-apache-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: RTCworkflow
+  template:
+    metadata:
+      labels:
+        app: RTCworkflow
+    spec:
+      containers:
+        - name: RTCworkflow
+          image: rtcclusterregistry.azurecr.io/image-workflow-1715701722207:latest
+          ports:
+            - containerPort: 80
