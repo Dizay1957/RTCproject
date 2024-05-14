@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: php-apache-deployment
+spec:
+  replicas: 1  # Adjust as needed
+  selector:
+    matchLabels:
+      app: php-apache
+  template:
+    metadata:
+      labels:
+        app: php-apache
+    spec:
+      containers:
+      - name: php-apache-container
+        image: php:8.1-apache
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: code-volume
+          mountPath: /var/www/html
+        - name: db-volume
+          mountPath: /docker-entrypoint-initdb.d
+      volumes:
+      - name: code-volume
+        hostPath:
+          path: ./Code  # Replace with the path to your Code directory
+      - name: db-volume
+        hostPath:
+          path: ./Database  # Replace with the path to your Database directory

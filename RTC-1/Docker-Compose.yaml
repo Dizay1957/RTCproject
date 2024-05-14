@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  php-apache:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      - ./Code:/var/www/html
+      - ./Database/rtc_centre.sql:/docker-entrypoint-initdb.d/rtc_centre.sql
+      - ./Database/rtc_dynamic_content.sql:/docker-entrypoint-initdb.d/rtc_dynamic_content.sql
+    environment:
+      - APACHE_RUN_USER=www-data
+      - APACHE_RUN_GROUP=www-data
+    command: ["apache2-foreground"]
